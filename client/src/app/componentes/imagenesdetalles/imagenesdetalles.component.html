@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería Social</title>
+
+</head>
+<body>
+<div class="container" *ngIf="imageData">
+  <div class="post">
+    <div class="post-header">
+      <img src="https://placehold.co/50x50" alt="Avatar" class="user-avatar">
+      <a href="#" class="username">{{ imageData.userId?.name || 'Usuario' }}</a>
+      <div class="post-options">...</div>
+    </div>
+
+    <img class="post-image" [src]="'http://localhost:5000' + imageData.imageUrl" alt="Publicación">
+
+
+
+
+    <div class="post-actions">
+      <div class="action-buttons">
+        <button class="action-btn like-btn">❤️</button>
+        <button class="action-btn">💬</button>
+
+        <button class="action-btn">📤</button>
+        <button class="action-btn save">🔖</button>
+      </div>
+
+      <div class="likes-count"> me gusta</div>
+
+      <div class="caption">
+        <a href="#" class="username">{{ imageData.userId?.name }}:</a>
+        <span class="caption-text">{{ imageData.descripcion }}</span>
+      </div>
+
+      <div class="timestamp">{{ imageData.createdAt | date:'short' }}</div>
+
+        <div class="comments">
+          <div class="total-comments">
+            <strong>{{ comments.length }}</strong> comentarios
+          </div>
+
+          <div class="comment" *ngFor="let comment of comments">
+            <a href="#" class="username">
+              {{ comment.userId?.name || comment.userId?.username || 'Usuario' }} :
+            </a>
+            <span>{{ comment.text }}</span>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="comment-input-container">
+      <input
+        type="text"
+        class="comment-input"
+        [(ngModel)]="newComment"
+        placeholder="Añade un comentario...">
+      <button class="post-comment-btn" (click)="submitComment()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Si no se ha cargado la imagen aún -->
+<div *ngIf="!imageData">
+  <p>Cargando imagen...</p>
+</div>
+
+</body>
+</html>

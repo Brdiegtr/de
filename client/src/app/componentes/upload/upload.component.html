@@ -1,0 +1,18 @@
+<div class="upload-container">
+  <h3>Subir imagen</h3>
+  <form (submit)="onSubmit($event)">
+    <div>
+      <label for="descripcion">Descripción:</label><br>
+      <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3"></textarea>
+    </div>
+    <div>
+      <label for="image">Selecciona imagen:</label><br>
+      <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" required />
+    </div>
+    <button type="submit" [disabled]="!selectedFile">Subir imagen</button>
+  </form>
+
+  <p *ngIf="message" [ngClass]="{'error': error, 'success': !error}">
+    {{ message }}
+  </p>
+</div>

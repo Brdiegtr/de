@@ -1,0 +1,257 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.container1{
+  background-color: #000000;
+}
+
+body,html {
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Header */
+.header {
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #000000;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 935px;
+  margin: 0 auto;
+  height: 60px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+/* Perfil */
+.profile-header {
+  display: flex;
+  padding: 30px 20px;
+  max-width: 935px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.profile-pic {
+  width: 310px;
+  height: 290px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 50px;
+  border: 1px solid #dbdbdb;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.username {
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-right: auto;
+  color: #ffffff;
+}
+
+.btn {
+  padding: 5px 9px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #0095f6;
+  color: white;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+}
+
+.profile-stats {
+  display: flex;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.stat span {
+  font-weight: 600;
+}
+
+.profile-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.profile-bio {
+  margin-bottom: 5px;
+}
+
+/* Galería */
+.gallery-tabs {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #dbdbdb;
+  margin-top: 20px;
+}
+
+.tab {
+  padding: 16px 0;
+  margin: 0 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #8e8e8e;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: #ffffff;
+  border-top: 1px solid #ffffff;
+  margin-top: -1px;
+}
+
+.tab i {
+  margin-right: 6px;
+}
+
+.gallery-grid {
+  background-color: #000000;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 935px;
+  margin: 30px auto 60px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover .gallery-hover {
+  opacity: 1;
+}
+
+.hover-stat {
+  margin: 0 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.hover-stat i {
+  margin-right: 5px;
+}
+
+/* Responsive */
+@media (max-width: 735px) {
+  .profile-header {
+    padding: 20px 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .profile-top {
+    justify-content: center;
+  }
+
+  .username {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+}
+.editarperfil{
+  text-decoration: none;
+  color: #ffffff;
+}
