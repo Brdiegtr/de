@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Servicios/auth.service';
-import { Router } from '@angular/router';  // Importa Router
+import { Router, RouterModule } from '@angular/router';  // Importa Router
 import { ImageService } from '../../Servicios/image.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule,CommonModule],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule,RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

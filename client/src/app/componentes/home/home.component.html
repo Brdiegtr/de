@@ -6,9 +6,9 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/upload"><i class="fas fa-cloud-upload-alt"></i> Subir imagen</a></li>
-          <li><a href="/Modificarperfil"><i class="fas fa-user-edit"></i> Modificar usuario</a></li>
-          <li><a href="/Miperfil"><i class="fas fa-images"></i> Mi Perfil</a></li>
+          <li><a [routerLink]="'/upload'"><i class="fas fa-cloud-upload-alt"></i> Subir imagen</a></li>
+          <li><a [routerLink]="'/Modificarperfil'"><i class="fas fa-user-edit"></i> Modificar usuario</a></li>
+          <li><a [routerLink]="'/Miperfil'"><i class="fas fa-images"></i> Mi Perfil</a></li>
           <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
         </ul>
       </nav>

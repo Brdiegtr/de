@@ -6,6 +6,8 @@ const cors = require('cors');
 const imageRoutes = require('./routes/imageRoutes');
 const authRoutes = require('./routes/authRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+const likeRoutes = require('./routes/likeRoutes');
+
 
 dotenv.config();
 
@@ -20,6 +22,8 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/images', imageRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/likes', likeRoutes);
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

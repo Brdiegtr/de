@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../../Servicios/image.service';
 import { AuthService } from '../../Servicios/auth.service';
 import { CommentService } from '../../Servicios/comment.service';
+import { LikeService } from '../../Servicios/like.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './imagenesdetalles.component.html',
-  styleUrl: './imagenesdetalles.component.css'
+  styleUrls: ['./imagenesdetalles.component.css']
 })
 export class ImagenesdetallesComponent {
   imagenId: string = '';
@@ -21,11 +22,15 @@ export class ImagenesdetallesComponent {
   comments: any[] = [];
   newComment: string = '';
 
+  likeCount: number = 0;
+  userLiked: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private imageService: ImageService,
     private authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private likeService: LikeService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +40,7 @@ export class ImagenesdetallesComponent {
 
     this.loadImage();
     this.loadComments();
+    this.loadLikes();
   }
 
   loadImage() {
@@ -50,14 +56,30 @@ export class ImagenesdetallesComponent {
   }
 
   submitComment() {
-  const text = this.newComment.trim();
-  if (!text) return;
+    const text = this.newComment.trim();
+    if (!text) return;
 
-  this.commentService.addComment(this.imagenId, text).subscribe(comment => {
-    this.comments.unshift(comment); // Ya viene con userId.name gracias al populate
-    this.newComment = '';
-    // this.loadComments(); // ❌ innecesario
-  });
-}
+    this.commentService.addComment(this.imagenId, text).subscribe(comment => {
+      this.comments.unshift(comment);
+      this.newComment = '';
+    });
+  }
 
+  // 👉 NUEVO: funciones para manejar likes
+  loadLikes() {
+    this.likeService.getLikesCount(this.imagenId).subscribe(data => {
+      this.likeCount = data.likes;
+    });
+
+    this.likeService.hasUserLiked(this.imagenId).subscribe(data => {
+      this.userLiked = data.liked;
+    });
+  }
+
+  toggleLike() {
+    this.likeService.toggleLike(this.imagenId).subscribe(data => {
+      this.userLiked = data.liked;
+      this.likeCount += this.userLiked ? 1 : -1;
+    });
+  }
 }

@@ -6,11 +6,12 @@ import { AuthService } from '../../Servicios/auth.service';
 import { ImageService } from '../../Servicios/image.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentService } from '../../Servicios/comment.service';
+import { LikeService } from '../../Servicios/like.service';
 
 @Component({
   selector: 'app-miperfil',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,CommonModule],  // Aquí debes agregar los módulos necesarios
+  imports: [FormsModule, ReactiveFormsModule,CommonModule,RouterModule],  // Aquí debes agregar los módulos necesarios
   templateUrl: './miperfil.component.html',
   styleUrls: ['./miperfil.component.css']  // <- 'styleUrls' con 's', no 'styleUrl'
 })
@@ -22,7 +23,8 @@ export class MiperfilComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private imageService: ImageService,
-    private commentService: CommentService  // Asegúrate de importar el servicio de comentarios
+    private commentService: CommentService,  // Asegúrate de importar el servicio de comentarios
+    private likeService: LikeService
   ) {}
 
   ngOnInit(): void {
@@ -36,27 +38,40 @@ export class MiperfilComponent implements OnInit {
     }
   }
 
-  loadUserImages(): void {
+loadUserImages(): void {
   this.imageService.getUserImages(this.user.id).subscribe({
     next: (data) => {
       this.userImages = data;
 
-      // 🔽 Obtener y asignar el total de comentarios para cada imagen
       this.userImages.forEach((img) => {
+        // Comentarios
         this.commentService.getComments(img._id).subscribe({
           next: (comments) => {
             img.commentCount = comments.length;
           },
           error: (err) => {
-            console.error(`Error al obtener comentarios para la imagen ${img._id}`, err);
-            img.commentCount = 0; // Valor por defecto si falla
+            console.error(`Error al obtener comentarios para ${img._id}`, err);
+            img.commentCount = 0;
           }
         });
+
+        // Likes
+          this.likeService.getLikesCount(img._id).subscribe({
+            next: (likeData) => {
+              img.likeCount = likeData.likes;  // <- Cambiar aquí 'count' por 'likes'
+            },
+            error: (err) => {
+              console.error(`Error al obtener likes para ${img._id}`, err);
+              img.likeCount = 0;
+            }
+          });
+
       });
     },
     error: (err) => console.error('Error al cargar imágenes del usuario', err)
   });
 }
+
 
 
   logout(): void {
