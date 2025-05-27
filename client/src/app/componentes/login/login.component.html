@@ -1,6 +1,7 @@
 <div class="login-container">
   <h2>Iniciar Sesion</h2>
   <form (ngSubmit)="onSubmit()">
+    <label for="">Correo electrónico</label>
     <input
       type="email"
       [(ngModel)]="email"
@@ -8,6 +9,7 @@
       placeholder="Correo electrónico"
       required
     />
+    <label for="">Contraseña</label>
     <input
       type="password"
       [(ngModel)]="password"

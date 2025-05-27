@@ -5,13 +5,14 @@
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
-.container1{
-  background-color: #000000;
+
+.container1 {
+  background-color: #f5f5f5;
 }
 
-body,html {
-  background-color: #000000;
-  color: #ffffff;
+body, html {
+  background-color: #f5f5f5;
+  color: #1e1e1e;
   line-height: 1.6;
 }
 
@@ -23,8 +24,8 @@ body,html {
 
 /* Header */
 .header {
-  border-bottom: 1px solid #dbdbdb;
-  background-color: #000000;
+  border-bottom: 1px solid #ddd;
+  background-color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -44,7 +45,7 @@ body,html {
   font-size: 1.8rem;
   font-weight: 600;
   text-decoration: none;
-  color: #ffffff;
+  color: #1e1e1e;
 }
 
 .nav-icons {
@@ -54,7 +55,7 @@ body,html {
 
 .nav-icon {
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #1e1e1e;
 }
 
 /* Perfil */
@@ -64,6 +65,9 @@ body,html {
   max-width: 935px;
   margin: 0 auto;
   flex-wrap: wrap;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .profile-pic {
@@ -72,7 +76,7 @@ body,html {
   border-radius: 50%;
   object-fit: cover;
   margin-right: 50px;
-  border: 1px solid #dbdbdb;
+  border: 2px solid #ccc;
 }
 
 .profile-info {
@@ -88,29 +92,39 @@ body,html {
 
 .username {
   font-size: 1.4rem;
-  font-weight: 300;
+  font-weight: 500;
   margin-right: auto;
-  color: #ffffff;
+  color: #1e1e1e;
 }
 
 .btn {
-  padding: 5px 9px;
+  padding: 5px 12px;
   border-radius: 4px;
   font-weight: 600;
   font-size: 0.9rem;
   margin-right: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn-primary {
-  background-color: #0095f6;
+  background-color: #2563eb;
   color: white;
   border: none;
 }
 
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
 .btn-secondary {
   background-color: transparent;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #f0f0f0;
 }
 
 .profile-stats {
@@ -122,7 +136,7 @@ body,html {
 
 .stat {
   font-size: 1rem;
-  color: #ffffff;
+  color: #1e1e1e;
 }
 
 .stat span {
@@ -142,8 +156,9 @@ body,html {
 .gallery-tabs {
   display: flex;
   justify-content: center;
-  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid #ddd;
   margin-top: 20px;
+  background-color: #ffffff;
 }
 
 .tab {
@@ -152,16 +167,16 @@ body,html {
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: #8e8e8e;
+  color: #999;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
 .tab.active {
-  color: #ffffff;
-  border-top: 1px solid #ffffff;
-  margin-top: -1px;
+  color: #1e1e1e;
+  border-top: 2px solid #2563eb;
+  margin-top: -2px;
 }
 
 .tab i {
@@ -169,7 +184,7 @@ body,html {
 }
 
 .gallery-grid {
-  background-color: #000000;
+  background-color: #f5f5f5;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
@@ -182,6 +197,8 @@ body,html {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
 }
 
 .gallery-img {
@@ -231,8 +248,8 @@ body,html {
   }
 
   .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     margin-right: 0;
     margin-bottom: 20px;
   }
@@ -244,6 +261,7 @@ body,html {
   .username {
     width: 100%;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   .gallery-grid {
@@ -251,7 +269,8 @@ body,html {
     gap: 5px;
   }
 }
-.editarperfil{
+
+.editarperfil {
   text-decoration: none;
-  color: #ffffff;
+  color: #2563eb;
 }

@@ -1,16 +1,14 @@
-
-
 .upload-container {
   max-width: 400px;
   width: 100%;
   padding: 40px;
   margin: 80px auto;
-  padding: 40px;
-  background-color: #1c1c1e;
+  background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #ffffff;
+  color: #1e1e1e;
+  transition: transform 0.3s ease;
 }
 
 .upload-container:hover {
@@ -20,7 +18,7 @@
 .upload-container h3 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #ffffff;
+  color: #1e1e1e;
 }
 
 .upload-container form {
@@ -33,30 +31,31 @@
   font-weight: 600;
   font-size: 0.95rem;
   margin-bottom: 0.3rem;
-  color: #dddddd;
+  color: #333333;
   text-align: left;
 }
 
 .upload-container textarea,
 .upload-container input[type="file"] {
-  border: 1px solid transparent;
+  border: 1px solid #cccccc;
   border-radius: 10px;
   padding: 12px;
   font-size: 0.95rem;
-  background-color: #2a2a2d;
-  color: #ffffff;
+  background-color: #f9f9f9;
+  color: #1e1e1e;
   resize: vertical;
   transition: border-color 0.3s ease;
 }
 
 .upload-container textarea:focus,
 .upload-container input[type="file"]:focus {
-  border-color: #1e90ff;
+  border-color: #2563eb;
+  outline: none;
 }
 
 .upload-container button {
   padding: 0.75rem;
-  background-color: #1e90ff;
+  background-color: #e60023;
   border: none;
   border-radius: 10px;
   color: #ffffff;
@@ -67,7 +66,7 @@
 }
 
 .upload-container button:hover {
-  background-color: #0f78d4;
+  background-color: #1d4ed8;
   transform: scale(1.03);
 }
 
@@ -79,9 +78,9 @@
 }
 
 .upload-container .error {
-  color: #ff4d4f;
+  color: #e53935;
 }
 
 .upload-container .success {
-  color: #4caf50;
+  color: #43a047;
 }

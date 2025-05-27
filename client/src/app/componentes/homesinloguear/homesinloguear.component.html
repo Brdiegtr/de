@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div id="container">
+  <header id="header">
+    <div id="logo-brand">
+      <img id="logo" src="/logo.png" alt="Logo MayGallery" />
+      <span id="brand">MayGallery</span>
+    </div>
+
+    <nav class="nav-left">
+      <ul>
+        <li><a href="#container"><i class="fas fa-home"></i>Explorar</a></li>
+      </ul>
+    </nav>
+
+    <div id="buscador-container">
+      <input type="text" class="filtrar" placeholder="Buscar" />
+      <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <nav class="menu">
+      <ul>
+        <li><a href="/login"><i class="fas fa-sign-in-alt"></i>Iniciar sesión</a></li>
+        <li><a href="/registro"><i class="fas fa-user-plus"></i>Regístrate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="cuerpo" id="inicio">
+    <h1 class="titulo" id="explorar">Explora lo mejor de Pinterest</h1>
+
+    <div class="galeria">
+      <div *ngFor="let imagen of imagenes" class="gallery-item">
+        <img [src]="'http://localhost:5000' + imagen.imageUrl" alt="Imagen" class="media-preview" />
+        <div class="gallery-item-title">{{ imagen.descripcion }}</div>
+      </div>
+    </div>
+  </div>
+</div>

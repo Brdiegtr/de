@@ -1,20 +1,22 @@
 .contenedor {
   max-width: 600px;
-  width: 1100%;
+  width: 100%;
   margin: 30px auto;
   padding: 40px;
-  background-color: #1c1c1e;
+  background-color: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #ffffff;
+  color: #333;
 }
-.titulo{
+
+.titulo {
   margin-bottom: 24px;
-  color: #ffffff;
+  color: #1e1e1e;
   font-size: 28px;
   font-weight: 600;
 }
+
 .perfil-form {
   display: flex;
   flex-direction: column;
@@ -30,7 +32,7 @@
   margin-bottom: 0.5rem;
   font-weight: bold;
   text-align: left;
-  color: #ffffff;
+  color: #333;
   font-size: 1rem;
   margin-left: 0.5rem;
 }
@@ -39,50 +41,57 @@
 .form-group textarea {
   padding: 14px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #ccc;
   outline: none;
   font-size: 16px;
-  background-color: #2c2c2e;
-  color: #ffffff;
-  transition: border 0.3s ease;
+  background-color: #f0f0f0;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px #2563eb66;
 }
 
 .perfil-form button {
   padding: 0.75rem;
   border: none;
-  background-color: #2a69a9;
+  background-color: #2563eb;
   color: #fff;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .perfil-form button:disabled {
-  background-color: #555;
+  background-color: #aaa;
   cursor: not-allowed;
 }
 
 .perfil-form button:hover:enabled {
-  background-color: #0f78d4;
+  background-color: #1e40af;
+  box-shadow: 0 0 10px #1e40af66;
 }
 
 .success-message {
-  color: #4caf50;
+  color: #2e7d32;
   text-align: center;
   margin-top: 1rem;
   font-weight: bold;
 }
 
 .error-message {
-  color: #ff4d4f;
+  color: #d32f2f;
   text-align: center;
   margin-top: 1rem;
   font-weight: bold;
 }
 
 .loading {
-  color: #ccc;
+  color: #666;
   text-align: center;
   margin-top: 2rem;
   font-size: 1.2rem;

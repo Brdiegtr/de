@@ -8,11 +8,12 @@ import { MiperfilComponent } from './componentes/miperfil/miperfil.component';
 import { ModificarperfilComponent } from './componentes/modificarperfil/modificarperfil.component';
 import { UploadComponent } from './componentes/upload/upload.component';
 import { ImagenesdetallesComponent } from './componentes/imagenesdetalles/imagenesdetalles.component';
+import { HomesinloguearComponent } from './componentes/homesinloguear/homesinloguear.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: HomesinloguearComponent,
   },
   {
     path: 'login',
