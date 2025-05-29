@@ -1,24 +1,37 @@
 <div class="login-container">
   <h2>Iniciar Sesion</h2>
-  <form (ngSubmit)="onSubmit()">
-    <label for="">Correo electrónico</label>
-    <input
-      type="email"
-      [(ngModel)]="email"
-      name="email"
-      placeholder="Correo electrónico"
-      required
-    />
-    <label for="">Contraseña</label>
-    <input
-      type="password"
-      [(ngModel)]="password"
-      name="password"
-      placeholder="Contraseña"
-      required
-    />
-    <button type="submit">Entrar</button>
-    <a href="./registro" class="registro-link">¿No tienes cuenta? Regístrate</a>
-  </form>
-  <p *ngIf="error" class="error">{{ error }}</p>
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <label>Correo electrónico</label>
+  <input
+    type="email"
+    [(ngModel)]="email"
+    name="email"
+    placeholder="Correo electrónico"
+    required
+    email
+    #emailInput="ngModel"
+  />
+  <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+    Ingresa un correo válido.
+  </div>
+
+  <label>Contraseña</label>
+  <input
+    type="password"
+    [(ngModel)]="password"
+    name="password"
+    placeholder="Contraseña"
+    required
+    minlength="6"
+    #passwordInput="ngModel"
+  />
+  <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+    La contraseña debe tener al menos 6 caracteres.
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+  <a href="./registro" class="registro-link">¿No tienes cuenta? Regístrate</a>
+</form>
+<p *ngIf="error" class="error">{{ error }}</p>
+
 </div>

@@ -18,6 +18,7 @@ export class ImagenesdetallesComponent {
   imagenId: string = '';
   imageData: any = null;
   currentUserId: string = '';
+  isAuthenticated: boolean = false;
 
   comments: any[] = [];
   newComment: string = '';
@@ -35,6 +36,8 @@ export class ImagenesdetallesComponent {
 
   ngOnInit(): void {
     this.imagenId = this.route.snapshot.paramMap.get('id') || '';
+    this.isAuthenticated = this.authService.isLoggedIn();
+
     const user = this.authService.getUser();
     this.currentUserId = user?._id || '';
 
@@ -65,18 +68,26 @@ export class ImagenesdetallesComponent {
     });
   }
 
-  // 👉 NUEVO: funciones para manejar likes
   loadLikes() {
     this.likeService.getLikesCount(this.imagenId).subscribe(data => {
       this.likeCount = data.likes;
     });
 
-    this.likeService.hasUserLiked(this.imagenId).subscribe(data => {
-      this.userLiked = data.liked;
-    });
+    if (this.isAuthenticated) {
+      this.likeService.hasUserLiked(this.imagenId).subscribe(data => {
+        this.userLiked = data.liked;
+      });
+    } else {
+      this.userLiked = false; // por si acaso
+    }
   }
 
   toggleLike() {
+    if (!this.isAuthenticated) {
+      alert('Debes iniciar sesión para dar like.');
+      return;
+    }
+
     this.likeService.toggleLike(this.imagenId).subscribe(data => {
       this.userLiked = data.liked;
       this.likeCount += this.userLiked ? 1 : -1;

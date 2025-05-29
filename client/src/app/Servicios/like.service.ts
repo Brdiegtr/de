@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LikeService {
   private apiUrl = 'http://localhost:5000/api/likes';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Asumiendo que guardas el token en localStorage
-    return new HttpHeaders({
-      'Authorization': token || ''
-    });
+    const token = this.authService.getToken();
+    if (token) {
+      return new HttpHeaders({ 'Authorization': token });
+    }
+    return new HttpHeaders(); // sin token
   }
 
   toggleLike(imageId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/toggle`, { imageId }, {
-      headers: this.getAuthHeaders()
-    });
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.apiUrl}/toggle`, { imageId }, { headers });
   }
 
   getLikesCount(imageId: string): Observable<any> {
@@ -28,8 +30,14 @@ export class LikeService {
   }
 
   hasUserLiked(imageId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/liked/${imageId}`, {
-      headers: this.getAuthHeaders()
-    });
+    const headers = this.getAuthHeaders();
+    const token = headers.get('Authorization');
+
+    if (!token) {
+      // El usuario no está autenticado, devolvemos false sin llamar al backend
+      return of({ liked: false });
+    }
+
+    return this.http.get(`${this.apiUrl}/liked/${imageId}`, { headers });
   }
 }
