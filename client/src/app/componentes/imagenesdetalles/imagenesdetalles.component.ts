@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../../Servicios/image.service';
 import { AuthService } from '../../Servicios/auth.service';
 import { CommentService } from '../../Servicios/comment.service';
 import { LikeService } from '../../Servicios/like.service';
+import { SocketService } from '../../Servicios/socket.service'; // 👈 Importa esto
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './imagenesdetalles.component.html',
   styleUrls: ['./imagenesdetalles.component.css']
 })
-export class ImagenesdetallesComponent {
+export class ImagenesdetallesComponent implements OnDestroy {
   imagenId: string = '';
   imageData: any = null;
   currentUserId: string = '';
@@ -31,7 +32,8 @@ export class ImagenesdetallesComponent {
     private imageService: ImageService,
     private authService: AuthService,
     private commentService: CommentService,
-    private likeService: LikeService
+    private likeService: LikeService,
+    private socketService: SocketService // 👈 Inyecta el socket
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +46,18 @@ export class ImagenesdetallesComponent {
     this.loadImage();
     this.loadComments();
     this.loadLikes();
+
+    // 👂 Escuchar comentarios nuevos en tiempo real
+    this.socketService.listen('newComment', (data: any) => {
+      if (data.imageId === this.imagenId) {
+        this.comments.unshift(data);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    // ⚠️ Limpieza opcional si necesitas quitar listeners
+    this.socketService.listen('newComment', () => {}); // Detach stub
   }
 
   loadImage() {
@@ -63,7 +77,11 @@ export class ImagenesdetallesComponent {
     if (!text) return;
 
     this.commentService.addComment(this.imagenId, text).subscribe(comment => {
-      this.comments.unshift(comment);
+      // Emitir el nuevo comentario a todos los sockets
+      this.socketService.emit('newComment', {
+        ...comment,
+        imageId: this.imagenId
+      });
       this.newComment = '';
     });
   }
@@ -78,7 +96,7 @@ export class ImagenesdetallesComponent {
         this.userLiked = data.liked;
       });
     } else {
-      this.userLiked = false; // por si acaso
+      this.userLiked = false;
     }
   }
 

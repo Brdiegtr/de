@@ -1,8 +1,12 @@
+// routes/commentRoutes.js
 const express = require('express');
-const router = express.Router();
 const commentController = require('../controllers/commentController');
 
-router.post('/:imageId', commentController.addComment);
-router.get('/:imageId', commentController.getCommentsByImage);
+module.exports = (io) => {
+  const router = express.Router();
 
-module.exports = router;
+  router.post('/:imageId', commentController.addComment(io)); // 👈 pasamos io
+  router.get('/:imageId', commentController.getCommentsByImage);
+
+  return router;
+};

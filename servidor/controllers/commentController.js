@@ -4,7 +4,8 @@ const Comment = require('../models/Comment');
 // Agregar un comentario
 // controllers/commentController.js
 
-exports.addComment = async (req, res) => {
+// 👇 Exportamos la función como una fábrica para poder inyectar io
+exports.addComment = (io) => async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ msg: 'Token no proporcionado' });
@@ -26,8 +27,19 @@ exports.addComment = async (req, res) => {
 
     await newComment.save();
 
-    // 👇 Aquí se hace populate para devolver el user
     const populatedComment = await Comment.findById(newComment._id).populate('userId', 'name');
+
+    // 👇 Emitir evento por socket
+    io.emit('newComment', {
+      _id: populatedComment._id,
+      text: populatedComment.text,
+      imageId: populatedComment.imageId,
+      createdAt: populatedComment.createdAt,
+      userId: {
+        _id: populatedComment.userId._id,
+        name: populatedComment.userId.name,
+      }
+    });
 
     res.status(201).json(populatedComment);
   } catch (error) {

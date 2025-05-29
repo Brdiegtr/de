@@ -1,18 +1,70 @@
 <div class="login-container">
   <h2>Registro</h2>
-<form (ngSubmit)="onSubmit()">
-  <label for="">Nombre Completo</label>
-  <input type="text" id="nombrecompleto" [(ngModel)]="nombrecompleto" name="nombrecompleto" placeholder="Nombre" required>
-  <label for="">Usuario</label>
-  <input type="text" [(ngModel)]="name" name="name" placeholder="Usuario" required />
-  <label for="">Correo electrónico</label>
-  <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-  <label for="">Contraseña</label>
-  <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
-  <button type="submit">Registrarse</button>
-  <a href="./login" class="registro-link">¿Ya tienes cuenta? Inicia sesión</a>
-</form>
-<p *ngIf="error" style="color:red">{{ error }}</p>
-<p *ngIf="success" style="color:green">{{ success }}</p>
+  <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+    <label for="nombrecompleto">Nombre Completo</label>
+    <input
+      type="text"
+      id="nombrecompleto"
+      [(ngModel)]="nombrecompleto"
+      name="nombrecompleto"
+      placeholder="Nombre"
+      required
+      minlength="3"
+      #nombreCompletoInput="ngModel"
+    />
+    <div *ngIf="nombreCompletoInput.invalid && nombreCompletoInput.touched" class="error">
+      El nombre debe tener al menos 3 caracteres.
+    </div>
 
+    <label for="name">Usuario</label>
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="name"
+      name="name"
+      placeholder="Usuario"
+      required
+      minlength="3"
+      #usuarioInput="ngModel"
+    />
+    <div *ngIf="usuarioInput.invalid && usuarioInput.touched" class="error">
+      El nombre de usuario debe tener al menos 3 caracteres.
+    </div>
+
+    <label for="email">Correo electrónico</label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Correo electrónico"
+      required
+      email
+      #emailInput="ngModel"
+    />
+    <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+      Ingresa un correo válido.
+    </div>
+
+    <label for="password">Contraseña</label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Contraseña"
+      required
+      minlength="6"
+      #passwordInput="ngModel"
+    />
+    <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+      La contraseña debe tener al menos 6 caracteres.
+    </div>
+
+    <button type="submit" [disabled]="registroForm.invalid">Registrarse</button>
+    <a href="./login" class="registro-link">¿Ya tienes cuenta? Inicia sesión</a>
+  </form>
+
+  <p *ngIf="error" style="color:red">{{ error }}</p>
+  <p *ngIf="success" style="color:green">{{ success }}</p>
 </div>

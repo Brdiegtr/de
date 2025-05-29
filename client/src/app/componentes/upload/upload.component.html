@@ -10,6 +10,7 @@
       <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" required />
     </div>
     <button type="submit" [disabled]="!selectedFile">Subir imagen</button>
+    <a href="./home">Regresar</a>
   </form>
 
   <p *ngIf="message" [ngClass]="{'error': error, 'success': !error}">
