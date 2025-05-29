@@ -108,13 +108,13 @@ body, html {
 }
 
 .btn-primary {
-  background-color: #2563eb;
-  color: white;
+  background-color: #e60023;
+  color: rgb(144, 40, 40);
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #1d4ed8;
+  background-color: #aa001a;
 }
 
 .btn-secondary {
@@ -272,5 +272,5 @@ body, html {
 
 .editarperfil {
   text-decoration: none;
-  color: #2563eb;
+  color: #ffffff;
 }
