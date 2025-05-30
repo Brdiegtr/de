@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomesinloguearComponent implements OnInit {
   imagenes: any[] = [];
+  busqueda: string = '';
+
 
   constructor(private imageService: ImageService) {}
 
@@ -24,4 +26,11 @@ export class HomesinloguearComponent implements OnInit {
       }
     });
   }
+  get imagenesFiltradas() {
+  return this.imagenes.filter(imagen =>
+    imagen.descripcion.toLowerCase().includes(this.busqueda.toLowerCase())
+  );
+  }
+
+
 }

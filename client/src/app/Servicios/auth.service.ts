@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
@@ -12,7 +12,7 @@ export class AuthService {
     nombrecompleto: string;
     name: string;
     email: string;
-    password: string
+    password: string;
   }) {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
@@ -50,13 +50,24 @@ export class AuthService {
     return null;
   }
 
-  updateProfile(id: string, data: {
-    nombrecompleto: string;
-    name: string;
-    bio: string;
-    email: string;
-    password?: string
-  }) {
+  updateProfile(
+    id: string,
+    data: {
+      nombrecompleto: string;
+      name: string;
+      bio: string;
+      email: string;
+      password?: string;
+    }
+  ) {
     return this.http.put(`${this.apiUrl}/update/${id}`, data);
+  }
+
+  deleteProfile(userId: string) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/delete/${userId}`, { headers });
   }
 }

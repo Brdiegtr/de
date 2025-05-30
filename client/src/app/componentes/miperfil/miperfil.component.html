@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Perfil - MayGallery</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+<title>Mi Perfil - MayGallery</title>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+
 <div class="container1">
-    <!-- Header -->
+  <!-- Header -->
   <header class="header">
     <div class="header-content">
       <a href="#" class="logo">MayGallery</a>
       <div class="nav-icons">
         <a [routerLink]="'/upload'" class="nav-icon"><i class="far fa-plus-square"></i></a>
-        <a [routerLink]="''" class="nav-icon"><i class="fas fa-home"></i></a>
+        <a [routerLink]="'/home'" class="nav-icon"><i class="fas fa-home"></i></a>
         <a (click)="logout()" class="nav-icon"><i class="fas fa-sign-out-alt"></i></a>
       </div>
     </div>
@@ -23,16 +20,24 @@
   <div class="container">
     <!-- Sección de perfil -->
     <div class="profile-header">
-      <img src="" alt="Foto de perfil" class="profile-pic">
+      <img src="" alt="Foto de perfil" class="profile-pic" />
       <div class="profile-info">
         <div class="profile-top">
           <h6 class="username">{{ user?.nombrecompleto }}</h6>
-          <button class="btn btn-primary" ><a  class="editarperfil" href="Modificarperfil">Editar perfil</a></button>
+          <button class="btn btn-primary">
+            <a class="editarperfil" [routerLink]="['/Modificarperfil']">Editar perfil</a>
+          </button>
+
+          <div class="dropdown" [class.open]="dropdownOpen">
+            <i class="fas fa-ellipsis-v dropdown-toggle" (click)="toggleDropdown()"></i>
+            <div class="dropdown-menu" *ngIf="dropdownOpen">
+              <button (click)="eliminarPerfil()" class="btn btn-link">Eliminar perfil</button>
+            </div>
+          </div>
         </div>
 
-
         <p class="profile-name">{{ user?.name }}</p>
-                <div class="profile-stats">
+        <div class="profile-stats">
           <div class="stat"><span>128</span> publicaciones</div>
           <div class="stat"><span>1.2k</span> seguidores</div>
           <div class="stat"><span>356</span> seguidos</div>
@@ -50,17 +55,18 @@
 
     <div class="gallery-grid">
       <div class="gallery-item" *ngFor="let img of userImages">
-        <img [src]="'http://localhost:5000' + img.imageUrl" [alt]="img.descripcion" class="gallery-img">
-          <div class="gallery-hover">
-            <div class="hover-stat">
-              <i class="fas fa-heart"></i> {{ img.likeCount || 0 }}
-            </div>
-            <i class="fas fa-comment"></i> {{ img.commentCount || 0 }}
+        <img
+          [src]="'http://localhost:5000' + img.imageUrl"
+          [alt]="img.descripcion"
+          class="gallery-img"
+        />
+        <div class="gallery-hover">
+          <div class="hover-stat">
+            <i class="fas fa-heart"></i> {{ img.likeCount || 0 }}
           </div>
-
+          <i class="fas fa-comment"></i> {{ img.commentCount || 0 }}
+        </div>
       </div>
     </div>
   </div>
 </div>
-</body>
-</html>

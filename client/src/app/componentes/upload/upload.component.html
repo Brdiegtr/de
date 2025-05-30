@@ -3,13 +3,36 @@
   <form (submit)="onSubmit($event)">
     <div>
       <label for="descripcion">Descripción:</label><br>
-      <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3"></textarea>
+      <textarea
+        id="descripcion"
+        [(ngModel)]="descripcion"
+        name="descripcion"
+        rows="3"
+        required
+        #desc="ngModel">
+      </textarea>
+      <div *ngIf="desc.invalid && desc.touched" class="error">
+        La descripción es obligatoria.
+      </div>
     </div>
+
     <div>
       <label for="image">Selecciona imagen:</label><br>
-      <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" required />
+      <input
+        type="file"
+        id="image"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        required
+      />
     </div>
-    <button type="submit" [disabled]="!selectedFile">Subir imagen</button>
+
+    <button
+      type="submit"
+      [disabled]="!selectedFile || !descripcion"
+    >
+      Subir imagen
+    </button>
     <a href="./home">Regresar</a>
   </form>
 

@@ -16,6 +16,11 @@ export const routes: Routes = [
     component: HomesinloguearComponent,
   },
   {
+    path: 'homeexplore',
+    component: HomesinloguearComponent,
+  }
+  ,
+  {
     path: 'login',
     component: LoginComponent,
   },

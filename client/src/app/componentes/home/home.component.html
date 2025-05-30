@@ -1,27 +1,47 @@
-  <div id="container">
-    <header id="header" class="glass-card">
-      <div id="logo-container">
-        <img id="logo" src="./logo.png" alt="Logo Galería" />
-        <span id="brand">MayGallery</span>
-      </div>
-      <nav>
-        <ul>
-          <li><a [routerLink]="'/upload'"><i class="fas fa-cloud-upload-alt"></i> Subir imagen</a></li>
-          <li><a [routerLink]="'/Modificarperfil'"><i class="fas fa-user-edit"></i> Modificar usuario</a></li>
-          <li><a [routerLink]="'/Miperfil'"><i class="fas fa-images"></i> Mi Perfil</a></li>
-          <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-        </ul>
-      </nav>
-    </header>
+<div id="container">
+  <header id="header" class="glass-card">
+    <div id="logo-container">
+      <img id="logo" src="./logo.png" alt="Logo Galería" />
+      <span id="brand">MayGallery</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/upload'"><i class="fas fa-cloud-upload-alt"></i> Subir imagen</a></li>
+        <li><a [routerLink]="'/Modificarperfil'"><i class="fas fa-user-edit"></i> Modificar usuario</a></li>
+        <li><a [routerLink]="'/Miperfil'"><i class="fas fa-images"></i> Mi Perfil</a></li>
+        <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="welcome">
-      <p>Bienvenido {{ user?.name }}</p>
-    </section>
+  <section id="welcome">
+    <p>Bienvenido {{ user?.name }}</p>
+  </section>
 
-    <main id="gallery">
-      <div class="gallery-item" *ngFor="let img of AllImages" (click)="goToImageDetails(img._id)" style="cursor: pointer;">
-        <img [src]="'http://localhost:5000' + img.imageUrl" [alt]="img.descripcion || 'Sin descripción'">
-        <div class="gallery-item-title">{{ img.descripcion || 'Sin descripción' }}</div>
-      </div>
-    </main>
+  <!-- Búsqueda -->
+  <div class="search-bar glass-card">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Buscar por descripción..."
+    />
   </div>
+
+  <!-- Galería -->
+  <main id="gallery">
+    <div
+      class="gallery-item"
+      *ngFor="let img of filteredImages"
+      (click)="goToImageDetails(img._id)"
+      style="cursor: pointer;"
+    >
+      <img
+        [src]="'http://localhost:5000' + img.imageUrl"
+        [alt]="img.descripcion || 'Sin descripción'"
+      />
+      <div class="gallery-item-title">
+        {{ img.descripcion || 'Sin descripción' }}
+      </div>
+    </div>
+  </main>
+</div>
